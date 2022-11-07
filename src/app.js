@@ -21,6 +21,14 @@ function formatDate(timestamp) {
   return `${day} ${hours}:${minutes}`;
 }
 
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+  return days[day];
+}
+
 function displayForecast(response) {
   let forecast = response.data.daily;
 
@@ -31,24 +39,25 @@ function displayForecast(response) {
     if (index < 6) {
       forecastHTML =
         forecastHTML +
-        `
-
-    <div class="col-2">
-      <div class="weather-forecast-date">${forecastDay.dt} </div>
-      <img src="http://shecodes-assets.s3.amazonaws.com/api/weather/icons/${
-        forecastDay.condition[0].icon
-      }.png" alt="" width="42" />
-      <div class="weather-forecast-temperatures">
-        <span class="weather-forecast-temp-max">${Math.round(
-          forecastDay.temperature.maximum
-        )}° </span>
-        <span class="weather-forecast-temp-min">${Math.round(
-          forecastDay.temperature.minimum
-        )}°</span>
-      </div>
-    </div>
+        `     
+        <div class="col-2">
+          <div class="weather-forecast-date">${formatDay(
+            forecastDay.time
+          )}</div>
+            <img src="${
+              forecastDay.condition.icon_url
+            }" alt="forecast_icon" width="36" />
+              <div class="weather-forecast-temperatures">
+              <span class="weather-forecast-temperature-max"> ${Math.round(
+                forecastDay.temperature.maximum
+              )}°</span>
+              <span class="weather-forecast-temperature-min"> ${Math.round(
+                forecastDay.temperature.minimum
+              )}°</span>
+              </div>
+          </div>
   
-  `;
+    `;
     }
   });
   forecastHTML = forecastHTML + `</div>`;
@@ -56,10 +65,10 @@ function displayForecast(response) {
 }
 
 function getForecast(coordinates) {
-  console.log(coordinates);
   let apiKey = "b89oa74t3f2022fff569a253b5f033b0";
-  let apiUrl = `https://api.shecodes.io/weather/v1/forecast?lon=${coordinates.lon}&lat=${coordinates.lat}&key=${apiKey}&units=metric`;
-  axios.get(apiUrl).then(displayForecast);
+  let apiURL = `https://api.shecodes.io/weather/v1/forecast?lat=${coordinates.latitude}&lon=${coordinates.longitude}&key=${apiKey}&units=metric`;
+  console.log(apiURL);
+  axios.get(apiURL).then(displayForecast);
 }
 
 function displayTemperature(response) {
