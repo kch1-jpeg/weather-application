@@ -1,5 +1,6 @@
 function formatDate(timestamp) {
   let date = new Date(timestamp);
+  let now = new Date();
   let hours = date.getHours();
   if (hours < 10) {
     hours = `0${hours}`;
@@ -18,8 +19,28 @@ function formatDate(timestamp) {
     "Saturday",
   ];
   let day = days[date.getDay()];
-  return `${day} ${hours}:${minutes}`;
+  let months = [
+    "Jan",
+    "Feb",
+    "Mar",
+    "Apr",
+    "May",
+    "Jun",
+    "Jul",
+    "Aug",
+    "Sept",
+    "Oct",
+    "Nov",
+    "Dec",
+  ];
+  let month = months[now.getMonth()];
+  let currentDate = now.getDate();
+  return `${day} ${currentDate} ${month} ${hours}:${minutes}`;
 }
+
+let dateElement = document.querySelector("#current-time");
+let currentTime = new Date();
+dateElement.innerHTML = formatDate(currentTime);
 
 function formatDay(timestamp) {
   let date = new Date(timestamp * 1000);
