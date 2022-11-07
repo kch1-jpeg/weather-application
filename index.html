@@ -18,6 +18,12 @@
     ></script>
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <link rel="stylesheet" href="src/style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@100&display=swap"
+      rel="stylesheet"
+    />
     <title>Weather App</title>
   </head>
   <body>
@@ -36,23 +42,22 @@
                 />
               </div>
               <div class="col-3">
-                <input type="submit" value="Search" class="btn btn-primary" />
+                <input type="submit" value="Search" class="search-button" />
               </div>
             </div>
           </form>
           <div class="overview">
-            <li id="current-time"></li>
             <h1 id="city"></h1>
             <ul>
+              <li id="current-time"></li>
               <li>Last updated: <span id="date"></span></li>
-
               <li id="description"></li>
             </ul>
           </div>
           <div class="row">
             <div class="col-6">
               <div class="d-flex weather-temperature">
-                <img src="" alt="Clear" id="icon" />
+                <img src="" alt="Clear" id="icon" width="72" />
                 <div>
                   <strong id="temperature"></strong>
                   <span class="units"> °C </span>
@@ -61,8 +66,8 @@
             </div>
             <div class="col-6">
               <ul>
-                <li>Humidity: <span id="humidity"></span>%</li>
-                <li>Wind: <span id="wind"></span> mph</li>
+                <li class="desc">Humidity: <span id="humidity"></span>%</li>
+                <li class="desc">Wind: <span id="wind"></span> mph</li>
               </ul>
             </div>
             <div class="weather-forecast" id="forecast"></div>
